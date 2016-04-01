@@ -11,7 +11,7 @@ class Autoloader
             $pathElements = explode('\\', $class);
             array_shift($pathElements);
             $path = ROOT_DIR . implode(DIRECTORY_SEPARATOR, $pathElements) . '.php';
-var_dump($path);
+
             if (file_exists($path)) {
                 require_once $path;
             }

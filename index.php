@@ -10,20 +10,18 @@ require_once 'Core' . DIRECTORY_SEPARATOR . 'Autoloader.php';
 
 \NewsRestApi\Core\Autoloader::init();
 
-\NewsRestApi\Config::DB_NAME;
-
 // \MyMVC\Library\Utility\Session::start();
 
-// \MyMVC\Library\Core\Database::setInstance(
-//     \MyMVC\Library\Config::get('dbInstance'),
-//     \MyMVC\Library\Config::get('dbDrive'),
-//     \MyMVC\Library\Config::get('dbUser'),
-//     \MyMVC\Library\Config::get('dbPass'),
-//     \MyMVC\Library\Config::get('dbName'),
-//     \MyMVC\Library\Config::get('dbHost')
-// );
+\NewsRestApi\Core\Db\Database::setInstance(
+    \NewsRestApi\Config::DB_INSTANCE,
+    \NewsRestApi\Config::DB_DRIVE,
+    \NewsRestApi\Config::DB_USER,
+    \NewsRestApi\Config::DB_PASS,
+    \NewsRestApi\Config::DB_NAME,
+    \NewsRestApi\Config::DB_HOST);
 
+$router = new \NewsRestApi\Core\Router();
 // $router = new \MyMVC\Library\Routing\DefaultRouter();
 
-// $app = \MyMVC\Library\App::getInstance();
-// $app->start($router);
+$app = \NewsRestApi\Core\App::getInstance();
+$app->start($router);

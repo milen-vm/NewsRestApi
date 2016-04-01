@@ -2,11 +2,6 @@
 namespace NewsRestApi\Core;
 
 use NewsRestApi\Core\Router;
-use MyMVC\Library\MVC\View;
-use MyMVC\Library\Config;
-use MyMVC\Library\Core\Database;
-use MyMVC\Library\Utility\Storage;
-use MyMVC\Library\Utility\Session;
 
 class App
 {

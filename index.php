@@ -21,7 +21,6 @@ require_once 'Core' . DIRECTORY_SEPARATOR . 'Autoloader.php';
     \NewsRestApi\Config::DB_HOST);
 
 $router = new \NewsRestApi\Core\Router();
-// $router = new \MyMVC\Library\Routing\DefaultRouter();
 
 $app = \NewsRestApi\Core\App::getInstance();
 $app->start($router);

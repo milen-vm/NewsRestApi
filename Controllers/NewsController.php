@@ -9,18 +9,15 @@ class NewsController extends BaseController
 
     public function get($id = null)
     {
-//         $model = new NewsModel();
+        $model = new NewsModel();
 
-//         if ($id === null) {
-//             $news = $model->getAll();
-//         } else {
-//             $news = $model->getById($id);
-//         }
+        if ($id === null) {
+            $news = $model->getAll();
+        } else {
+            $news = $model->getById($id);
+        }
 
-//         return new JsonRespons($news);
-
-        $headers = apache_request_headers();
-        return new JsonRespons($headers);
+        return new JsonRespons($news);
     }
 
     public function post($id = null)

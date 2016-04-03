@@ -6,9 +6,12 @@ class JsonRespons
 
     public function __construct($data, $status = 200)
     {
-//         header('Access-Control-Allow-Origin: *');
-//         header('Access-Control-Allow-Methods: *');
+        $data = $this->escaping($data);
+
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, DELETE');
         header('Content-Type: application/json');
+
         $this->response($data, $status);
     }
 
@@ -16,8 +19,7 @@ class JsonRespons
     {
         header('HTTP/1.1 ' . $statusCode . ' ' . $this->requestStatus($statusCode));
 
-//         echo json_encode($data, JSON_UNESCAPED_UNICODE);
-        echo json_encode($data);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     private function requestStatus($code)
@@ -35,5 +37,19 @@ class JsonRespons
         $resultStatus = isset($status[$code]) ? $status[$code] : $status[500];
 
         return $resultStatus;
+    }
+
+    private function escaping($data)
+    {
+        foreach ($data as $key => $value) {
+
+            if (is_array($value)) {
+                $this->escaping($value);
+            } else {
+                $data[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+            }
+        }
+
+        return $data;
     }
 }

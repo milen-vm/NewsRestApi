@@ -9,15 +9,18 @@ class NewsController extends BaseController
 
     public function get($id = null)
     {
-        $model = new NewsModel();
+//         $model = new NewsModel();
 
-        if ($id === null) {
-            $news = $model->getAll();
-        } else {
-            $news = $model->getById($id);
-        }
+//         if ($id === null) {
+//             $news = $model->getAll();
+//         } else {
+//             $news = $model->getById($id);
+//         }
 
-        new JsonRespons($news);
+//         return new JsonRespons($news);
+
+        $headers = apache_request_headers();
+        return new JsonRespons($headers);
     }
 
     public function post($id = null)
@@ -28,6 +31,9 @@ class NewsController extends BaseController
             $result = $model->create($this->data);
 
             return new JsonRespons(array('id' => $result));
+        } else {
+            $model->save($id, $this->data);
+            return new JsonRespons(array('result' => 'success'));
         }
     }
 }

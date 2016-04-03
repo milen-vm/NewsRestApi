@@ -21,7 +21,7 @@ class Database
     /**
      *
      * @param string $instanceName
-     * @return \MyMVC\Library\Core\Database
+     * @return \NewsRestApi\Core\Db\Database
      * @throws \Exception
      */
     public static function getInstance($instanceName = 'default')
@@ -56,7 +56,7 @@ class Database
      *
      * @param string $statement
      * @param array $driverOptions
-     * @return \MyMVC\Library\Core\Statement
+     * @return \NewsRestApi\Core\Db\Statement
      */
     public function prepare($statement, array $driverOptions = [])
     {

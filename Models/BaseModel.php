@@ -109,7 +109,7 @@ abstract class BaseModel
     {
         $stmtArgs = array_merge([
             'select' => '*',
-            'from' => $this->table,
+            'table' => $this->table,
             'join' => [],
             'where' => '',
             'orderby' => '',
@@ -126,10 +126,10 @@ abstract class BaseModel
     public function update($args, $params)
     {
         $stmtArgs = array_merge(array(
-        	'update' => $this->table,
+        	'table' => $this->table,
         ), $args);
 
-        $stmt = 'UPDATE ' . $stmtArgs['update'] . ' SET ' .
+        $stmt = 'UPDATE ' . $stmtArgs['table'] . ' SET ' .
             $stmtArgs['set'] . ' WHERE ' . $stmtArgs['where'];
 
         $result = $this->db->prepare($stmt);
@@ -140,7 +140,7 @@ abstract class BaseModel
     private function buildStmt($args)
     {
         $stmt = 'SELECT ' . $args['select'] .
-            ' FROM ' . $args['from'];
+            ' FROM ' . $args['table'];
 
         if (count($args['join']) > 0) {
             foreach ($args['join'] as $join) {

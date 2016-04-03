@@ -63,6 +63,7 @@ class NewsModel extends BaseModel
         ));
     }
 
+    // Validation is very simple and can be improved
     private function validateNewsFields($data)
     {
         if (!isset($data['title']) || !isset($data['date']) || !isset($data['text'])) {
@@ -70,7 +71,7 @@ class NewsModel extends BaseModel
         }
 
         if (!$this->validateDate($data['date'])) {
-            throw new NewsException('Invalid date time fromat.', 400);
+            throw new NewsException('Invalid date time format.', 400);
         }
     }
 

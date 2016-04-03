@@ -59,8 +59,6 @@ class App
             . self::CONTROLLERS_SUFFIX;
 
         if (!class_exists($controllerClass)) {
-//             throw new \Exception('Controller ' . $controllerClass . 'does not exist');
-
             header('HTTP/1.1 404 Not Found');
             exit();
         }
@@ -71,8 +69,6 @@ class App
     private function setMethod($method)
     {
         if (!method_exists($this->controler, $method)) {
-//             throw new \Exception('Method ' . $method .' in class '
-//                 . get_class($this->controler) . ' does not exist');
             header('HTTP/1.1 405 Method Not Allowed');
             header('Allow: GET, POST, DELETE');
             exit();

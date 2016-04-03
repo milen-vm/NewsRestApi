@@ -44,7 +44,7 @@ class JsonRespons
         foreach ($data as $key => $value) {
 
             if (is_array($value)) {
-                $this->escaping($value);
+                $data[$key] = $this->escaping($value);
             } else {
                 $data[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
             }

@@ -16,12 +16,6 @@ class Router
     {
         $this->setUri();
         $this->setAction();
-
-        // Set defaults from config file
-//         $this->setController(Config::get('defaultController'));
-//         $this->setAction(Config::get('defaultAction'));
-//         $this->setRoute(Config::get('defaultRoute'));
-
         $this->parseUri();
     }
 
@@ -35,11 +29,6 @@ class Router
 
         $this->setController(array_shift($pathParts));
         $this->params = $pathParts;
-    }
-
-    public function getUri()
-    {
-        return $this->uri;
     }
 
     private function setUri()

@@ -123,7 +123,7 @@ abstract class BaseModel
         return $result;
     }
 
-    public function update($args, $params)
+    protected function update($args, $params)
     {
         $stmtArgs = array_merge(array(
         	'table' => $this->table,
@@ -135,6 +135,16 @@ abstract class BaseModel
         $result = $this->db->prepare($stmt);
 
         return $result->execute($params);
+    }
+
+    protected function delete($id)
+    {
+        $stmt = 'DELETE FROM ' . $this->table .
+            ' WHERE id=?';
+        $result = $this->db->prepare($stmt);
+        $result->execute(array($id));
+
+        return $result->rowCount();
     }
 
     private function buildStmt($args)

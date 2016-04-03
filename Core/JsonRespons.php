@@ -1,5 +1,5 @@
 <?php
-namespace NewsRestApi;
+namespace NewsRestApi\Core;
 
 class JsonRespons
 {

@@ -2,7 +2,8 @@
 namespace NewsRestApi\Controllers;
 
 use NewsRestApi\Models\NewsModel;
-use NewsRestApi\JsonRespons;
+use NewsRestApi\Core\JsonRespons;
+use NewsRestApi\Exceptions\NewsException;
 
 class NewsController extends BaseController
 {
@@ -23,14 +24,44 @@ class NewsController extends BaseController
     public function post($id = null)
     {
         $model = new NewsModel();
+        $respons = array();
+        $code = 200;
 
-        if ($id === null) {
-            $result = $model->create($this->data);
+        try {
+            if ($id === null) {
+                $respons['id'] = $model->create($this->data);
+            } else {
+                $model->save($id, $this->data);
+                $respons['result'] = 'success';
+            }
 
-            return new JsonRespons(array('id' => $result));
-        } else {
-            $model->save($id, $this->data);
-            return new JsonRespons(array('result' => 'success'));
+        } catch (NewsException $ne) {
+            $respons['error'] = $ne->getMessage();
+            $code = $ne->getCode();
         }
+
+        return new JsonRespons($respons, $code);
+    }
+
+    public function delete($id = null)
+    {
+        $respons = array();
+        $code = 200;
+
+        if ($id == null) {
+            $respons['error'] = 'News ID is missing.';
+            $code = 400;
+        } else {
+            try {
+                $model = new NewsModel();
+            	$model->remove($id);
+                $respons['result'] = 'success';
+            } catch (NewsException $ne) {
+                $respons['error'] = $ne->getMessage();
+                $code = $ne->getCode();
+            }
+        }
+
+        return new JsonRespons($respons, $code);
     }
 }

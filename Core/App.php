@@ -17,7 +17,7 @@ class App
     private $method;
 
     /**
-     * @todo replace DefaultRouter with IRouter
+     *
      * @var \NewsRestApi\Core\Router
      */
     private static $router;
@@ -40,14 +40,10 @@ class App
 
     public function start(Router $router)
     {
-        self::$router = $router;//var_dump(self::$router->getController());exit;
+        self::$router = $router;
 
         $this->setController(self::$router->getController());
         $this->setMethod(self::$router->getAction());
-
-        //$this->checkAuthorisation($this->controler, $this->method);
-
-        $params = self::$router->getParams();
 
         call_user_func_array([
             $this->controler,
@@ -86,65 +82,11 @@ class App
     }
 
     /**
-     * @todo replace DefaultRouter with IRouter
-     * @return \MyMVC\Library\Routing\DefaultRouter
+     *
+     * @return \NewsRestApi\Core\Router
      */
     public static function getRouter()
     {
         return self::$router;
     }
-
-//     private function checkAuthorisation($controller, $method)
-//     {
-//         $authorisation = new Authorisation($controller, $method);
-//         $authorisation->runAnnotation();
-//     }
-
-//     public static function redirect($route = null, $controler = null, $action = null,
-//         $params = [])
-//     {
-//         $url = App::buildUrl(null, $route,
-//             $controler, $action, $params);
-
-//         header("Location: {$url}");
-//         exit();
-//     }
-
-//     public static function buildUrl($lang = null, $route = null,
-//         $controler = null, $action = null, $params = [])
-//     {
-//         $url = LINK_PREFIX;
-
-//         if ($lang == null) {
-//             $storedLang = Storage::get('lang');
-//             if ($storedLang != null && $storedLang != Config::get('defaultLanguage')) {
-//                 $url .= "/{$storedLang}";
-//             }
-//         } else {
-//             $url .= "/{$lang}";
-//         }
-
-//         if ($route !== null && $route !== Config::get('defaultRoute')) {
-//             $url .= "/{$route}";
-//         }
-
-//         if ($controler !== null) {
-//             $url .= "/{$controler}";
-//         }
-
-//         if ($action !== null) {
-//             $url .= "/{$action}";
-
-//             foreach ($params as $param) {
-//                 $url .= "/{$param}";
-//             }
-//         }
-
-//         return $url;
-//     }
-
-//     public static function csrfToken()
-//     {
-//         return hash('sha256', uniqid());
-//     }
 }

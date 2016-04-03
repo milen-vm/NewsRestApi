@@ -63,10 +63,23 @@ class NewsModel extends BaseModel
         ));
     }
 
+    public function remove($id)
+    {
+        $affectedRows = $this->delete($id);
+
+        if ($affectedRows == 0) {
+            throw new NewsException('Invalid news ID.', 404);
+        }
+    }
+
     // Validation is very simple and can be improved
     private function validateNewsFields($data)
     {
         if (!isset($data['title']) || !isset($data['date']) || !isset($data['text'])) {
+            throw new NewsException('Some of the input fields are missing.', 400);
+        }
+
+        if (empty($data['title']) || empty($data['date']) || empty($data['text'])) {
             throw new NewsException('Some of the input fields are empty.', 400);
         }
 
